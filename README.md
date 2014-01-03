@@ -7,8 +7,8 @@ Para las pruebas es necesario tener jQuery instalado
 Uso basico example-1.php
 ===========
 
-<code>
+````javascript
 $(document).ready(function() {
     initialize_gmap();
 });
-</code>
+````
