@@ -1,27 +1,58 @@
 /**
 * @title Funciones para Google Maps API V3
-* @description Funciones que me simplifican ligeramente la vida.
 * @author Anton Zekeriev Rodin
+* Licencia MIT, es decir puedes usarlo bajo tu propia responsabilidad.
 */
 
-/**
-* Config options
+
+/*
+| -------------------------------------------------------------------
+| Funciones para Google Maps API V3
+| -------------------------------------------------------------------
+| 
+| En este archivo encontraras un conjunto de funciones que simplifican
+| mi vida cuando trabajo con la Api de Geolocalización de Google Maps
+| digamos son funciones basicas que se pueden extenderse y modificarse
+| muy facilmente
+|
+| -------------------------------------------------------------------
+| Instrucciones
+| -------------------------------------------------------------------
+|
+| These are the things you can load automatically:
+|
+| 1. Variables globales de configuración
+| 2. Funciones basicas
+| 3. Funciones relativas a Marcadores
+| 4. Funciones relativas a StreetVew
+| 5. Funciones relativas a la localización de las direcciones
+|
+*/
+
+
+/*
+| -------------------------------------------------------------------
+|  Variables globales de configuración.
+| -------------------------------------------------------------------
+|
 */
 var map;
 
+/**
+ * Initial configuration
+ */
 var Config = {
-    zoom: 6,
-    lat: 40.40594,
-    lng: -3.636249,
-    map_canvas: "map-canvas",
-    street_canvas: "street-canvas"
+    lat: 40.40594,                  //Madrid lat
+    lng: -3.636249,                 //Madrid lng
+    map_canvas: "map-canvas",       //Map id tag, for example <div id="map-canvas"></div>
+    street_canvas: "street-canvas"  //Street view ID tag, for example <div id="street-canvas"></div>
 };
 
 /**
 * Map options
 */
 var MapOptions = {
-        zoom: Config.zoom,
+        zoom: 6,                                                    //Zoom
         center: new google.maps.LatLng(Config.lat, Config.lng),
         mapTypeId: google.maps.MapTypeId.ROADMAP
 };

@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8" />
@@ -15,7 +14,9 @@
             
             var map2 = new Map(40.405, -3.636, 15);
             map2.init('map-canvas-2');
-            map2.changeType('terrain');
+            map2.changeType('default');      
+            map2.addMarker( {lat: 40.40594, lng: -3.636249, html: "Awesome Marker", dragable: false } );
+            map2.addMarker( {lat: 40.405, lng: -3.636, html: "Awesome Marker", dragable: false } );
             
         });
     </script>
