@@ -21,7 +21,7 @@ Instalación:
 ````
 En los ejemplos se usa el framework CSS <a href="http://getbootstrap.com">Bootstrap 3</a>. No es imprescindible para el correcto uso.
 
-Uso basico <a href="https://github.com/antonrodin/gmap-basics/blob/master/example-1.php">example-1.php</a>
+Uso basico <a href="https://github.com/antonrodin/gmap-basics/blob/master/example-1.html">example-1.php</a>
 ===========
 
 ````javascript
