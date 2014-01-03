@@ -5,7 +5,7 @@
 */
 
 /**
-* !#Config options
+* Config options
 */
 var map;
 
@@ -15,7 +15,7 @@ var Config = {
     lng: -3.636249,
     map_canvas: "map-canvas",
     street_canvas: "street-canvas"
-}
+};
 
 /**
 * Map options
@@ -44,7 +44,7 @@ var ActualPos = {
 	lat: 40.405392,
 	lng: -3.63729
 };
-/* ï¿½#Config options */
+
 
 /* Modify settings */
 function set_zoom(zoom) {
