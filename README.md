@@ -26,6 +26,19 @@ Uso basico <a href="https://github.com/antonrodin/gmap-basics/blob/master/exampl
 
 ````javascript
 $(document).ready(function() {
-    initialize_gmap();
+    
+    // Crear mapa 1
+    // El primer parametro es latitud, el segundo longitud y el tercero Zoom. 
+    var map = new Map(40.40594, -3.636249, 17);
+    map.init('map-canvas');
+            
+    // Crear mapa 2
+    var map2 = new Map(40.405, -3.636, 15);
+    map2.init('map-canvas-2');
+    map2.changeType('satellite');
+            
 });
 ````
+
+Creación de dos mapas diferentes entre si, aunque las coordenadas basicamente son las mismas. En la declaración del primer mapa
+esta la parte minima necesaria para mostrar cualquier mapa.
