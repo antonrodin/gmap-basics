@@ -8,7 +8,9 @@
     <script src="js/gmap.js" type="text/javascript"></script> 
     
     <script type="text/javascript">
-        initialize_gmap();
+        $(document).ready(function() {
+            initialize_gmap();
+        });
     </script>
 
     <style type="text/css">
@@ -24,7 +26,13 @@
             <div class="col-lg-6">
                 <div id="map-canvas"></div>
             </div>
-            <div class="col-lg-6"></div>
+            <div class="col-lg-6">
+                <pre>
+                     $(document).ready(function() {
+                        initialize_gmap();
+                    });
+                </pre>
+            </div>
         </div>
     </div>
     
