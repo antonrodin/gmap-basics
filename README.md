@@ -52,14 +52,8 @@ Puedes verlo en el ejemplo 2: <a href="https://github.com/antonrodin/gmap-basics
 
 ````javascript
 $(document).ready(function() {
-            var map = new Map(40.40594, -3.636249, 17);
+            var map = new Map(40.40594, -3.636249, 10);
             map.init('map-canvas');
-            map.changeType('satellite');
-            
-            var map2 = new Map(40.405, -3.636, 15);
-            map2.init('map-canvas-2');
-            map2.changeType('default');      
-            map2.addMarker( {lat: 40.40594, lng: -3.636249, html: "Awesome Marker", dragable: false } );
-            map2.addMarker( {lat: 40.405, lng: -3.636, html: "Awesome Marker", dragable: false } );         
+            map.addMarker( {lat: 40.40594, lng: -3.636249, html: "Awesome Marker", dragable: false } );
 });
 ````

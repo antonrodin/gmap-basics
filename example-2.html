@@ -10,10 +10,7 @@
         $(document).ready(function() {
             var map = new Map(40.40594, -3.636249, 10);
             map.init('map-canvas');
-            for (i=1; i<=100; i++) {
-                x = 0.005*i;
-                map.addMarker( {lat: 40.40594+x, lng: -3.636249+x, html: "Awesome Marker: N" + i, dragable: false } );
-            }
+            map.addMarker( {lat: 40.40594, lng: -3.636249, html: "Awesome Marker", dragable: false } );
         });
     </script>
 
@@ -25,7 +22,7 @@
 <body>
     
     <div class="container">
-        <h1>Ejemplo de un mapa con 100 marcadores</h1>
+        <h1>Ejemplo de un mapa con un marcador</h1>
         <div class="row">
             <div class="col-lg-12">
                 <div id="map-canvas"></div>
