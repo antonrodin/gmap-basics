@@ -61,4 +61,36 @@ function Map (lat, lng, zoom) {
         }
     };
     
+    
+    this.findAddress = function(address) {
+        var self = this;
+        geocoder = new google.maps.Geocoder();
+        geocoder.geocode( { 'address': address },  function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
+
+                    if (results && results[0] && results[0].geometry && results[0].geometry.viewport) {
+                        
+                        self.map.fitBounds(results[0].geometry.viewport);
+                        
+                        var data = {
+                            lat: results[0].geometry.location.lat(),
+                            lng: results[0].geometry.location.lng(),
+                            html: address,
+                            title: address,
+                            draggable: false
+                        }
+                        
+                        self.addMarker(data);
+                    }
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        });
+        return true;
+    }
+    
 }
