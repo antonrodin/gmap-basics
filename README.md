@@ -57,3 +57,19 @@ $(document).ready(function() {
             map.addMarker( {lat: 40.40594, lng: -3.636249, html: "Awesome Marker", dragable: false } );
 });
 ````
+
+Buscar una dirección:
+=====================
+
+Puedes verlo en el ejemplo 2: <a href="https://github.com/antonrodin/gmap-basics/blob/master/example-3.html">example-3.html</a>
+
+````javascript
+$(document).ready(function() {
+            var map = new Map(40.40594, -3.636249, 17);
+            map.init('map-canvas');
+
+            $("#buscar-direccion").click(function() {
+                map.findAddress(document.getElementById("direccion").value);
+            });
+});
+````

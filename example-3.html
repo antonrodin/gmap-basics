@@ -13,7 +13,7 @@
             map.init('map-canvas');
 
             $("#buscar-direccion").click(function() {
-                map.findAddress("Madrid, 28030, Molina de Segura 25");
+                map.findAddress(document.getElementById("direccion").value);
             });
         });
     </script>
@@ -35,7 +35,7 @@
             </div>
             <div class="col-lg-6">
                 <h1>Formulario: </h1>
-                <form class="form-horizontal" role="form">
+                <form class="form-horizontal">
                     <div class="form-group">
                         <label for="inputEmail3" class="col-sm-2 control-label">Dirección</label>
                         <div class="col-sm-10">

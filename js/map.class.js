@@ -7,6 +7,9 @@
  */
 function Map (lat, lng, zoom) {
     
+    //Variable mapa que se usara para almacenar el mapa
+    this.map = null;
+    
     /**
      * Opciones del mapa
      * @type type
@@ -61,26 +64,27 @@ function Map (lat, lng, zoom) {
         }
     };
     
-    
+    /**
+     * Buscar dirección, establecer mapa alrededor de la dirección y colocar un marcador.
+     * @address String dirección, por ejemplo "New York"
+     */
     this.findAddress = function(address) {
         var self = this;
         geocoder = new google.maps.Geocoder();
         geocoder.geocode( { 'address': address },  function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
                 if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
-
                     if (results && results[0] && results[0].geometry && results[0].geometry.viewport) {
                         
+                        //Mostrar el mejor resultado obtenido:
                         self.map.fitBounds(results[0].geometry.viewport);
-                        
-                        var data = {
+                        data = {
                             lat: results[0].geometry.location.lat(),
                             lng: results[0].geometry.location.lng(),
                             html: address,
                             title: address,
-                            draggable: false
-                        }
-                        
+                            draggable: true
+                        }    
                         self.addMarker(data);
                     }
                 } else {
@@ -90,7 +94,6 @@ function Map (lat, lng, zoom) {
                 return false;
             }
         });
-        return true;
     }
     
 }
