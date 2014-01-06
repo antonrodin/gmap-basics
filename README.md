@@ -61,7 +61,7 @@ $(document).ready(function() {
 Buscar una dirección:
 =====================
 
-Puedes verlo en el ejemplo 2: <a href="https://github.com/antonrodin/gmap-basics/blob/master/example-3.html">example-3.html</a>
+Puedes verlo en el ejemplo 3: <a href="https://github.com/antonrodin/gmap-basics/blob/master/example-3.html">example-3.html</a>
 
 ````javascript
 $(document).ready(function() {
@@ -96,4 +96,21 @@ Asi mismo si el marcador es "arrastrable" se actualizan automaticamente de la si
             document.getElementById(self.lngId).value = marker.getPosition().lng();
         });
     }
+````
+
+Mostrar StreetView:
+===================
+
+Funcion muy basica para mostrar el Street View en una ventana diferente, asi como obtener las 3 coordenadas
+necesarias para almacenarlo, por ejemplo en una base de datos MySQL
+
+Este es el ejemplo basico para sacar el StreetView: ejemplo 4: <a href="https://github.com/antonrodin/gmap-basics/blob/master/example-4.html">example-4.html</a>
+
+
+````javascript
+$(document).ready(function() {
+            var map = new Map(40.40594, -3.636249, 17);
+            map.init('map-canvas');
+            map.initSV('street-canvas');
+});
 ````

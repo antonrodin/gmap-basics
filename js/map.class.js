@@ -10,6 +10,11 @@ function Map (lat, lng, zoom) {
     //Variable mapa que se usara para almacenar el mapa
     this.map = null;
     
+    //Variables basicas para Google Maps
+    this.lat = lat;
+    this.lng = lng;
+    this.zoom = zoom;
+    
     //Input ID Latitud and Longitud
     this.latId = "lat-id";
     this.lngId = "lng-id";
@@ -22,6 +27,14 @@ function Map (lat, lng, zoom) {
         zoom: zoom,
         center: new google.maps.LatLng(lat, lng),
         mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    
+    /**
+     * Opciones Street View
+     */
+    this.PanoramaOptions = {
+        position: this.MapOptions.center,
+        pov: { heading: 34, pitch: 10, zoom: 1 }
     };
     
     /**
@@ -114,6 +127,14 @@ function Map (lat, lng, zoom) {
                 return false;
             }
         });
-    } 
+    }
+    
+    /**
+     * Mostrar StreetView en el ID selecionado
+     */
+    this.initSV = function(id) {
+        var panorama = new google.maps.StreetViewPanorama(document.getElementById(id), this.PanoramaOptions);
+        this.map.setStreetView(panorama);
+    }
     
 }
