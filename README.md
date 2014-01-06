@@ -114,3 +114,6 @@ $(document).ready(function() {
             map.initSV('street-canvas');
 });
 ````
+
+En el siguiente ejemplo la funcion cambia, ya que actualiza dinamicamente estos parametros:
+

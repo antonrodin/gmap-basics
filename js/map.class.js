@@ -19,6 +19,11 @@ function Map (lat, lng, zoom) {
     this.latId = "lat-id";
     this.lngId = "lng-id";
     
+    //Parametros de StreetView
+    this.headingId = "heading-id";
+    this.pitchId = "pitch-id";
+    this.zoomId = "zoom-id";
+    
     /**
      * Opciones del mapa
      * @type type
@@ -135,6 +140,27 @@ function Map (lat, lng, zoom) {
     this.initSV = function(id) {
         var panorama = new google.maps.StreetViewPanorama(document.getElementById(id), this.PanoramaOptions);
         this.map.setStreetView(panorama);
+    }
+    
+    /**
+     * StreetView avanzada con "listeners" que actualizan las coordenadas
+     * de latitud, longitud, pitch and heading dinamicamente.
+     */
+    this.initSVAdvanced = function(id) {  
+        var self= this;    
+        var panorama = new google.maps.StreetViewPanorama(document.getElementById(id), this.PanoramaOptions);
+        this.map.setStreetView(panorama);
+        
+        google.maps.event.addListener(panorama, 'pov_changed', function() {
+            document.getElementById(self.headingId).value = panorama.getPov().heading;
+            document.getElementById(self.pitchId).value = panorama.getPov().pitch;
+        });
+    
+        google.maps.event.addListener(panorama, 'position_changed', function() {
+            document.getElementById(self.latId).value = panorama.getPosition().lat();;
+            document.getElementById(self.lngId).value = panorama.getPosition().lng();
+        });
+        
     }
     
 }
