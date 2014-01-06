@@ -10,6 +10,10 @@ function Map (lat, lng, zoom) {
     //Variable mapa que se usara para almacenar el mapa
     this.map = null;
     
+    //Input ID Latitud and Longitud
+    this.latId = "lat-id";
+    this.lngId = "lng-id";
+    
     /**
      * Opciones del mapa
      * @type type
@@ -86,6 +90,10 @@ function Map (lat, lng, zoom) {
                             draggable: true
                         }    
                         self.addMarker(data);
+                        
+                        //Insert latitud andlongitud into form
+                        document.getElementById(self.latId).value = data.lat;
+                        document.getElementById(self.lngId).value = data.lng;
                     }
                 } else {
                     return false;
@@ -94,6 +102,6 @@ function Map (lat, lng, zoom) {
                 return false;
             }
         });
-    }
+    } 
     
 }
