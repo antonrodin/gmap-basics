@@ -22,7 +22,6 @@ function Map (lat, lng, zoom) {
     //Parametros de StreetView
     this.headingId = "heading-id";
     this.pitchId = "pitch-id";
-    this.zoomId = "zoom-id";
     
     /**
      * Opciones del mapa

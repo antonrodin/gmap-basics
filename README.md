@@ -104,7 +104,7 @@ Mostrar StreetView:
 Funcion muy basica para mostrar el Street View en una ventana diferente, asi como obtener las 3 coordenadas
 necesarias para almacenarlo, por ejemplo en una base de datos MySQL
 
-Este es el ejemplo basico para sacar el StreetView: ejemplo 4: <a href="https://github.com/antonrodin/gmap-basics/blob/master/example-4.html">example-4.html</a>
+Este es el ejemplo basico para sacar el StreetView: <a href="https://github.com/antonrodin/gmap-basics/blob/master/example-4.html">example-4.html</a>
 
 
 ````javascript
@@ -117,3 +117,33 @@ $(document).ready(function() {
 
 En el siguiente ejemplo la funcion cambia, ya que actualiza dinamicamente estos parametros:
 
+````javascript
+    //Parametros de StreetView
+    this.headingId = "heading-id";
+    this.pitchId = "pitch-id";
+````
+
+Este es el código fuente basico para utilizarlo. Funciona junto con la busqueda de la dirección de un modo "correcto"
+aunque con ciertos bugs que supongo que se podrian corregirse, elaborando mejor el código fuente.
+
+````javascript
+    $(document).ready(function() {
+            var map = new Map(40.40594, -3.636249, 17);
+            map.init('map-canvas');
+            map.initSVAdvanced('street-canvas');
+            
+            //Buscar la dirección
+            $("#buscar-direccion").click(function() {
+                map.findAddress(document.getElementById("direccion").value);
+            });
+    });
+````
+
+El código fuente completo esta en el ejemplo 5: <a href="https://github.com/antonrodin/gmap-basics/blob/master/example-5.html">example-5.html</a>
+
+
+Conclusiones finales:
+=====================
+Este código para una implementación dentro de una aplicación web necesita una ligera depuración. Realmente no es necesario
+el uso de jQuery ni del framework Bootstrap. Aquí se utilizan para simplificar la vida y una presentación mas decente. Si quieres
+usar esto usalo bajo tu propia responsabilidad ;)
