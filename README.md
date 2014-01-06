@@ -73,3 +73,27 @@ $(document).ready(function() {
             });
 });
 ````
+
+Para obtener las coordenadas para el envio del formulario, se guardan en los input que se establecen por defecto dentro
+de los input con el id="lat-id" y "lng-id respectivamente.
+
+````javascript
+    //Valores por defecto:
+    this.latId = "lat-id";
+    this.lngId = "lng-id";
+
+    //Como se actualizan al geolocalizar:
+    document.getElementById(self.latId).value = data.lat;
+    document.getElementById(self.lngId).value = data.lng;
+````
+
+Asi mismo si el marcador es "arrastrable" se actualizan automaticamente de la siguiente manera:
+
+````javascript
+    if (data.draggable == true) {
+        google.maps.event.addListener(marker, 'drag', function() {
+            document.getElementById(self.latId).value = marker.getPosition().lat();
+            document.getElementById(self.lngId).value = marker.getPosition().lng();
+        });
+    }
+````
