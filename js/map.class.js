@@ -9,6 +9,7 @@ function Map (lat, lng, zoom) {
     
     //Variable mapa que se usara para almacenar el mapa
     this.map = null;
+    this.historicalOverlay = null;
     
     //Variables basicas para Google Maps
     this.lat = lat;
@@ -66,10 +67,9 @@ function Map (lat, lng, zoom) {
      * @param {type} data
      */
     this.addMarker = function(data) {
-        
         var self = this;
         
-        var marker = new google.maps.Marker({
+        self.historicalOverlay = new google.maps.Marker({
                     position: new google.maps.LatLng(data.lat, data.lng),
                     map: self.map,
                     draggable: data.draggable
@@ -82,16 +82,16 @@ function Map (lat, lng, zoom) {
                 maxWidth: 200
             });
 
-            google.maps.event.addListener(marker, 'click', function() {
-                infowindow.open(self.map, marker);
+            google.maps.event.addListener(self.historicalOverlay, 'click', function() {
+                infowindow.open(self.map, self.historicalOverlay);
             });
         }
         
         //If Marker Dragable Add listener
         if (data.draggable == true) {
-              google.maps.event.addListener(marker, 'drag', function() {
-                     document.getElementById(self.latId).value = marker.getPosition().lat();
-                     document.getElementById(self.lngId).value = marker.getPosition().lng();
+              google.maps.event.addListener(self.historicalOverlay, 'drag', function() {
+                     document.getElementById(self.latId).value = self.historicalOverlay.getPosition().lat();
+                     document.getElementById(self.lngId).value = self.historicalOverlay.getPosition().lng();
               });
         }
         
@@ -103,6 +103,9 @@ function Map (lat, lng, zoom) {
      */
     this.findAddress = function(address) {
         var self = this;
+        if (self.historicalOverlay != null) {
+            self.historicalOverlay.setMap(null);
+        }
         geocoder = new google.maps.Geocoder();
         geocoder.geocode( { 'address': address },  function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
