@@ -9,6 +9,7 @@ function Map (lat, lng, zoom) {
     
     //Variable mapa que se usara para almacenar el mapa
     this.map = null;
+    this.panorama = null;
     this.historicalOverlay = null;
     
     //Variables basicas para Google Maps
@@ -103,7 +104,7 @@ function Map (lat, lng, zoom) {
      */
     this.findAddress = function(address) {
         var self = this;
-        if (self.historicalOverlay != null) {
+        if (self.historicalOverlay !== null) {
             self.historicalOverlay.setMap(null);
         }
         geocoder = new google.maps.Geocoder();
@@ -123,6 +124,11 @@ function Map (lat, lng, zoom) {
                         }    
                         self.addMarker(data);
                         
+                        //Si Pano != 0 actualizamos StreetView
+                        if (self.panorama !== null) {
+                            self.panorama.setPosition(results[0].geometry.location);
+                        }
+                        
                         //Insert latitud andlongitud into form
                         document.getElementById(self.latId).value = data.lat;
                         document.getElementById(self.lngId).value = data.lng;
@@ -136,12 +142,21 @@ function Map (lat, lng, zoom) {
         });
     }
     
+    this.setSvPosition = function(lat, lng, heading, pitch) {
+        var self = this;
+        self.PanoramaOptions.position = new google.maps.LatLng(lat, lng);
+        self.PanoramaOptions.pov.heading = heading; 
+        self.PanoramaOptions.pov.pitch = pitch;
+        self.PanoramaOptions.pov.zoom = 1;
+    }
+    
     /**
      * Mostrar StreetView en el ID selecionado
      */
     this.initSV = function(id) {
-        var panorama = new google.maps.StreetViewPanorama(document.getElementById(id), this.PanoramaOptions);
-        this.map.setStreetView(panorama);
+        var self= this; 
+        self.panorama = new google.maps.StreetViewPanorama(document.getElementById(id), self.PanoramaOptions);
+        self.map.setStreetView(self.panorama);
     }
     
     /**
@@ -150,17 +165,17 @@ function Map (lat, lng, zoom) {
      */
     this.initSVAdvanced = function(id) {  
         var self= this;    
-        var panorama = new google.maps.StreetViewPanorama(document.getElementById(id), this.PanoramaOptions);
-        this.map.setStreetView(panorama);
+        self.panorama = new google.maps.StreetViewPanorama(document.getElementById(id), this.PanoramaOptions);
+        self.map.setStreetView(self.panorama);
         
-        google.maps.event.addListener(panorama, 'pov_changed', function() {
-            document.getElementById(self.headingId).value = panorama.getPov().heading;
-            document.getElementById(self.pitchId).value = panorama.getPov().pitch;
+        google.maps.event.addListener(self.panorama, 'pov_changed', function() {
+            document.getElementById(self.headingId).value = self.panorama.getPov().heading;
+            document.getElementById(self.pitchId).value = self.panorama.getPov().pitch;
         });
     
-        google.maps.event.addListener(panorama, 'position_changed', function() {
-            document.getElementById(self.latId).value = panorama.getPosition().lat();;
-            document.getElementById(self.lngId).value = panorama.getPosition().lng();
+        google.maps.event.addListener(self.panorama, 'position_changed', function() {
+            document.getElementById(self.latId).value = self.panorama.getPosition().lat();;
+            document.getElementById(self.lngId).value = self.panorama.getPosition().lng();
         });
         
     }

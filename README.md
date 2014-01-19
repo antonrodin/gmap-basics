@@ -141,6 +141,19 @@ aunque con ciertos bugs que supongo que se podrian corregirse, elaborando mejor 
 
 El código fuente completo esta en el ejemplo 5: <a href="https://github.com/antonrodin/gmap-basics/blob/master/example-5.html">example-5.html</a>
 
+Puedes manualmente establecer las coordenadas de StreetView. Proporcionando Latitud, Longitud, Heading y Pitch. Aquí un ejemplo de código:
+
+````javascript
+    $(document).ready(function() {
+            var map = new Map(40.376, -3.53947, 17);
+            map.init('map-canvas');
+            map.setSvPosition(40.376, -3.53947, -60.4513, -0.992719);
+            map.initSV('street-canvas');
+    });
+````
+
+El código fuente completo esta en el ejemplo 6: <a href="https://github.com/antonrodin/gmap-basics/blob/master/example-6.html">example-6.html</a>
+
 
 Conclusiones finales:
 =====================
