@@ -70,6 +70,41 @@ function Map (lat, lng, zoom) {
     this.addMarker = function(data) {
         var self = this;
         
+        var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(data.lat, data.lng),
+                    map: self.map,
+                    draggable: data.draggable
+        });
+
+        if (data.html !== undefined) {
+
+            var infowindow = new google.maps.InfoWindow({
+                content: data.html,
+                maxWidth: 200
+            });
+
+            google.maps.event.addListener(marker, 'click', function() {
+                infowindow.open(self.map, marker);
+            });
+        }
+        
+        //If Marker Dragable Add listener
+        if (data.draggable == true) {
+              google.maps.event.addListener(marker, 'drag', function() {
+                     document.getElementById(self.latId).value = marker.getPosition().lat();
+                     document.getElementById(self.lngId).value = marker.getPosition().lng();
+              });
+        }
+        
+    };
+    
+    /**
+     * Añadir marcador al Mapa
+     * @param {type} data
+     */
+    this.addMarkerAddress = function(data) {
+        var self = this;
+        
         self.historicalOverlay = new google.maps.Marker({
                     position: new google.maps.LatLng(data.lat, data.lng),
                     map: self.map,
@@ -104,6 +139,8 @@ function Map (lat, lng, zoom) {
      */
     this.findAddress = function(address) {
         var self = this;
+        
+        //Clear all Markers 
         if (self.historicalOverlay !== null) {
             self.historicalOverlay.setMap(null);
         }
@@ -122,7 +159,7 @@ function Map (lat, lng, zoom) {
                             title: address,
                             draggable: true
                         }    
-                        self.addMarker(data);
+                        self.addMarkerAddress(data);
                         
                         //Si Pano != 0 actualizamos StreetView
                         if (self.panorama !== null) {
