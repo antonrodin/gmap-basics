@@ -1,0 +1,28 @@
+{
+  "name": "gmap-basics",
+  "version": "2.0.0",
+  "description": "Es6 Class for manage Google Api Library",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antonrodin/gmap-basics.git"
+  },
+  "keywords": [
+    "Google",
+    "Maps",
+    "ES6"
+  ],
+  "author": "Anton Zekeriev Rodin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/antonrodin/gmap-basics/issues"
+  },
+  "homepage": "https://github.com/antonrodin/gmap-basics#readme",
+  "devDependencies": {
+    "webpack": "^2.2.0-rc.0"
+  }
+}
