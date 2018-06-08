@@ -1,6 +1,8 @@
 gmap-basics BETA
 ===========
 
+This is my old ES5 Version of Google Maps API Class. Checkout the new version...
+
 Objeto Mapa que contiene funciones basicas necesarias para utilizar Google Maps.
 Simplifica el uso de la API V3 de Google Maps. Personalmente necesito este tipo de objeto para
 Sitios web simples donde implementar una interacción basica con los mapas:
