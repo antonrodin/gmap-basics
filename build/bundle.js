@@ -77,24 +77,73 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var GMap = function GMap(elem, lat, lng, zoom) {
-    _classCallCheck(this, GMap);
+var GMap = function () {
+    function GMap(elem, lat, lng, zoom) {
+        _classCallCheck(this, GMap);
 
-    this.config = {
-        center: {
-            lat: lat,
-            lng: lng
-        },
-        zoom: zoom
-    };
+        this.config = {
+            center: {
+                lat: lat,
+                lng: lng
+            },
+            zoom: zoom
+        };
 
-    this.zoom = zoom;
-    this.elem = elem;
+        this.zoom = zoom;
+        this.elem = elem;
+    }
 
-    this.map = new google.maps.Map(this.elem, this.config);
-};
+    _createClass(GMap, [{
+        key: "init",
+        value: function init() {
+            this.map = new google.maps.Map(this.elem, this.config);
+        }
+
+        /**
+         * Change Map Type
+         * @param {normal, satelite, hibrido, relieve} tipo
+         */
+
+    }, {
+        key: "changeType",
+        value: function changeType(tipo) {
+            this.map.setOptions({ mapTypeId: tipo });
+        }
+    }, {
+        key: "changeOptions",
+
+
+        /**
+         * Change Map Options, like zoom or latitude and longitude
+         * @param {object} mapOptions like { zoom: 8 } 
+         */
+        value: function changeOptions(mapOptions) {
+            this.map.setOptions(mapOptions);
+        }
+
+        /**
+         * Add simple marker into your map
+         * @param {*} center { 0.00 , 0.00 } Latitude and Longitude Object
+         * @param {*} title Title of the marker
+         */
+
+    }, {
+        key: "addSimpleMarker",
+        value: function addSimpleMarker(center, title) {
+            var marker = new google.maps.Marker({
+                position: center,
+                map: this.map,
+                title: title
+            });
+        }
+    }]);
+
+    return GMap;
+}();
 
 exports.default = GMap;
 
@@ -111,8 +160,38 @@ var _gmap2 = _interopRequireDefault(_gmap);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var elem = document.getElementById('map-canvas');
-var gmap = new _gmap2.default(elem, -34.397, 150.644, 8);
+var elem1 = document.getElementById('map-canvas-1');
+var gmap1 = new _gmap2.default(elem1, -34.397, 150.644, 8);
+
+var elem2 = document.getElementById('map-canvas-2');
+var gmap2 = new _gmap2.default(elem2, 40.405, -3.636, 15);
+gmap2.init();
+gmap2.changeType('terrain');
+
+var elem3 = document.getElementById('map-canvas-3');
+var center3 = {
+    lat: 40.405,
+    lng: -3.636
+};
+var gmap3 = new _gmap2.default(elem3, center3.lat, center3.lng, 15);
+gmap3.init();
+gmap3.addSimpleMarker(center3, "My Awesome Marker");
+
+/**
+ * Some Listeners...
+ */
+
+//Button for change Zoom in the first map
+var button0 = document.getElementById('init-button');
+button0.addEventListener('click', function (e) {
+    gmap1.init();
+});
+
+//Button for change Zoom in the first map
+var button1 = document.getElementById('zoom-button');
+button1.addEventListener('click', function (e) {
+    gmap1.changeOptions({ zoom: 15 });
+});
 
 /***/ })
 /******/ ]);

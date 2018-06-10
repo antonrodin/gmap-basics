@@ -7,20 +7,44 @@
     <title>Google Maps Class Example</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
     <style>
-        #map-canvas {
+        .map-canvas-style {
             width: 100%;
             height: 300px;
             background-color: #eee;
             border: 3px solid #666;
         }
+
+        .mb1 {
+            margin-bottom: 1em;
+        }
+
     </style>
 </head>
 <body>
     
     <section class="section">
         <div class="container">
-            <h1 class="title">Google Maps Class First Example</h1>
-            <div id="map-canvas">
+            <h1 class="title">First Map</h1>
+            <div id="map-canvas-1" class="map-canvas-style mb1">
+
+            </div>
+
+            <div class="field is-grouped">
+                <div class="control">
+                        <button id="init-button" class="button is-info">Init Map</button>
+                        <button id="zoom-button" class="button is-info">Change Zoom</button>
+                </div>
+            </div>
+            
+
+            <hr>
+
+            <h1 class="title">Second Map</h1>
+            <div id="map-canvas-2" class="map-canvas-style"></div>
+
+            <hr>
+            <h1 class="title">Third Map</h1>
+            <div class="map-canvas-style" id="map-canvas-3"></div>
 
             </div>
         </div>
