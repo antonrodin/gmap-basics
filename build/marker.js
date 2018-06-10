@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -95,6 +95,9 @@ var GMap = function () {
 
         this.zoom = zoom;
         this.elem = elem;
+
+        // Array of current markers
+        this.markers = [];
     }
 
     _createClass(GMap, [{
@@ -139,6 +142,21 @@ var GMap = function () {
                 map: this.map,
                 title: title
             });
+
+            this.markers.push(marker);
+        }
+
+        /**
+         * Remove all markers from map
+         */
+
+    }, {
+        key: "removeMarkers",
+        value: function removeMarkers() {
+            this.markers.forEach(function (elem) {
+                return elem.setMap(null);
+            });
+            this.markers = [];
         }
     }]);
 
@@ -148,7 +166,8 @@ var GMap = function () {
 exports.default = GMap;
 
 /***/ }),
-/* 1 */
+/* 1 */,
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -160,37 +179,31 @@ var _gmap2 = _interopRequireDefault(_gmap);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var elem1 = document.getElementById('map-canvas-1');
-var gmap1 = new _gmap2.default(elem1, -34.397, 150.644, 8);
+var elem = document.getElementById('map-canvas');
+var center1 = { lat: 40.405, lng: -3.636 };
+var center2 = { lat: 40.506, lng: -3.637 };
+var gmap = new _gmap2.default(elem, center1.lat, center1.lng, 8);
 
-var elem2 = document.getElementById('map-canvas-2');
-var gmap2 = new _gmap2.default(elem2, 40.405, -3.636, 15);
-gmap2.init();
-gmap2.changeType('terrain');
-
-var elem3 = document.getElementById('map-canvas-3');
-var center3 = {
-    lat: 40.405,
-    lng: -3.636
-};
-var gmap3 = new _gmap2.default(elem3, center3.lat, center3.lng, 15);
-gmap3.init();
-gmap3.addSimpleMarker(center3, "My Awesome Marker");
-
-/**
- * Some Listeners...
- */
-
-//Button for change Zoom in the first map
-var button0 = document.getElementById('init-button');
+// Init map
+var button0 = document.getElementById('init-map');
 button0.addEventListener('click', function (e) {
-    gmap1.init();
+    gmap.init();
+    e.preventDefault();
 });
 
-//Button for change Zoom in the first map
-var button1 = document.getElementById('zoom-button');
+// Add simple marker into the map
+var button1 = document.getElementById('add-marker');
 button1.addEventListener('click', function (e) {
-    gmap1.changeOptions({ zoom: 15 });
+    gmap.addSimpleMarker(center1, "My Awesome Marker One");
+    gmap.addSimpleMarker(center2, "My Awesome Marker Two");
+    e.preventDefault();
+});
+
+// Add simple marker into the map
+var button2 = document.getElementById('remove-markers');
+button2.addEventListener('click', function (e) {
+    gmap.removeMarkers();
+    e.preventDefault();
 });
 
 /***/ })

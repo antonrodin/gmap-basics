@@ -12,6 +12,9 @@ export default class GMap {
 
         this.zoom = zoom;
         this.elem = elem;
+
+        // Array of current markers
+        this.markers = [];
      
     }
 
@@ -46,6 +49,16 @@ export default class GMap {
             map: this.map,
             title: title
         });
+
+        this.markers.push(marker);
+    }
+
+    /**
+     * Remove all markers from map
+     */
+    removeMarkers() {
+        this.markers.forEach(elem => elem.setMap(null));
+        this.markers = [];
     }
 
 }

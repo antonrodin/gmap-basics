@@ -1,0 +1,10 @@
+.map-canvas-style {
+    width: 100%;
+    height: 300px;
+    background-color: #eee;
+    border: 3px solid #666;
+}
+
+.mb1 {
+    margin-bottom: 1em;
+}

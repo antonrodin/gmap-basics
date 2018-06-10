@@ -2,10 +2,13 @@
 const path = require('path');
 
 const config = {
-    entry: "./src/index.js",
+    entry: {
+        "index.js": "./src/index.js",
+        "marker.js": "./src/marker.js"
+    },
     output: {
         path: path.resolve(__dirname, 'build'),
-        filename: "bundle.js"
+        filename: '[name]'
     },
     module: {
         rules: [
