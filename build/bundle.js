@@ -6,9 +6,9 @@
 /******/ 	function __webpack_require__(moduleId) {
 /******/
 /******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId])
+/******/ 		if(installedModules[moduleId]) {
 /******/ 			return installedModules[moduleId].exports;
-/******/
+/******/ 		}
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			i: moduleId,
@@ -63,14 +63,56 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 
-/***/ }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var GMap = function GMap(elem, lat, lng, zoom) {
+    _classCallCheck(this, GMap);
+
+    this.config = {
+        center: {
+            lat: lat,
+            lng: lng
+        },
+        zoom: zoom
+    };
+
+    this.zoom = zoom;
+    this.elem = elem;
+
+    this.map = new google.maps.Map(this.elem, this.config);
+};
+
+exports.default = GMap;
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _gmap = __webpack_require__(0);
+
+var _gmap2 = _interopRequireDefault(_gmap);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var elem = document.getElementById('map-canvas');
+var gmap = new _gmap2.default(elem, -34.397, 150.644, 8);
+
+/***/ })
 /******/ ]);
