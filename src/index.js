@@ -16,10 +16,12 @@ gmap2.changeType('terrain');
 const button0 = document.getElementById('init-button');
 button0.addEventListener('click', e => {
     gmap1.init();
+    e.preventDefault();
 })
 
 //Button for change Zoom in the first map
 const button1 = document.getElementById('zoom-button');
 button1.addEventListener('click', e => {
     gmap1.changeOptions({ zoom: 15 });
+    e.preventDefault();
 })

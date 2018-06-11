@@ -101,7 +101,7 @@ var GMap = function () {
     }
 
     _createClass(GMap, [{
-        key: "init",
+        key: 'init',
         value: function init() {
             this.map = new google.maps.Map(this.elem, this.config);
         }
@@ -112,12 +112,12 @@ var GMap = function () {
          */
 
     }, {
-        key: "changeType",
+        key: 'changeType',
         value: function changeType(tipo) {
             this.map.setOptions({ mapTypeId: tipo });
         }
     }, {
-        key: "changeOptions",
+        key: 'changeOptions',
 
 
         /**
@@ -132,18 +132,43 @@ var GMap = function () {
          * Add simple marker into your map
          * @param {*} center { 0.00 , 0.00 } Latitude and Longitude Object
          * @param {*} title Title of the marker
+         * @param {*} draggable true or false...
          */
 
     }, {
-        key: "addSimpleMarker",
+        key: 'addSimpleMarker',
         value: function addSimpleMarker(center, title) {
+            var draggable = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
             var marker = new google.maps.Marker({
                 position: center,
                 map: this.map,
+                draggable: draggable,
                 title: title
             });
 
-            this.markers.push(marker);
+            return this.markers.push(marker);
+        }
+
+        /**
+         * 
+         * @param {*} center {Lat, Lng} Object 
+         * @param {*} title Title of the Marker
+         * @param {*} html Some html fot Info Window
+         */
+
+    }, {
+        key: 'addHtmlMarker',
+        value: function addHtmlMarker(center, title, html) {
+            var _this = this;
+
+            var draggable = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+
+            var i = this.addSimpleMarker(center, title, draggable);
+            var info = new google.maps.InfoWindow({ content: html });;
+            this.markers[i - 1].addListener('click', function () {
+                return info.open(_this.map, _this.markers[i - 1]);
+            });
         }
 
         /**
@@ -151,7 +176,7 @@ var GMap = function () {
          */
 
     }, {
-        key: "removeMarkers",
+        key: 'removeMarkers',
         value: function removeMarkers() {
             this.markers.forEach(function (elem) {
                 return elem.setMap(null);
@@ -182,6 +207,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var elem = document.getElementById('map-canvas');
 var center1 = { lat: 40.405, lng: -3.636 };
 var center2 = { lat: 40.506, lng: -3.637 };
+var center3 = { lat: 40.507, lng: -3.635 };
+var center4 = { lat: 40.517, lng: -3.640 };
 var gmap = new _gmap2.default(elem, center1.lat, center1.lng, 8);
 
 // Init map
@@ -203,6 +230,18 @@ button1.addEventListener('click', function (e) {
 var button2 = document.getElementById('remove-markers');
 button2.addEventListener('click', function (e) {
     gmap.removeMarkers();
+    e.preventDefault();
+});
+
+var button3 = document.getElementById('add-custom-marker');
+button3.addEventListener('click', function (e) {
+    gmap.addSimpleMarker(center3, "Drag me into the Universe", true);
+    e.preventDefault();
+});
+
+var button4 = document.getElementById('html-marker');
+button4.addEventListener('click', function (e) {
+    gmap.addHtmlMarker(center4, "New HTML Marker", "<p>New <strong>asesome</strong> marker four</p>");
     e.preventDefault();
 });
 

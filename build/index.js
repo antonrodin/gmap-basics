@@ -101,7 +101,7 @@ var GMap = function () {
     }
 
     _createClass(GMap, [{
-        key: "init",
+        key: 'init',
         value: function init() {
             this.map = new google.maps.Map(this.elem, this.config);
         }
@@ -112,12 +112,12 @@ var GMap = function () {
          */
 
     }, {
-        key: "changeType",
+        key: 'changeType',
         value: function changeType(tipo) {
             this.map.setOptions({ mapTypeId: tipo });
         }
     }, {
-        key: "changeOptions",
+        key: 'changeOptions',
 
 
         /**
@@ -132,18 +132,43 @@ var GMap = function () {
          * Add simple marker into your map
          * @param {*} center { 0.00 , 0.00 } Latitude and Longitude Object
          * @param {*} title Title of the marker
+         * @param {*} draggable true or false...
          */
 
     }, {
-        key: "addSimpleMarker",
+        key: 'addSimpleMarker',
         value: function addSimpleMarker(center, title) {
+            var draggable = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
             var marker = new google.maps.Marker({
                 position: center,
                 map: this.map,
+                draggable: draggable,
                 title: title
             });
 
-            this.markers.push(marker);
+            return this.markers.push(marker);
+        }
+
+        /**
+         * 
+         * @param {*} center {Lat, Lng} Object 
+         * @param {*} title Title of the Marker
+         * @param {*} html Some html fot Info Window
+         */
+
+    }, {
+        key: 'addHtmlMarker',
+        value: function addHtmlMarker(center, title, html) {
+            var _this = this;
+
+            var draggable = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+
+            var i = this.addSimpleMarker(center, title, draggable);
+            var info = new google.maps.InfoWindow({ content: html });;
+            this.markers[i - 1].addListener('click', function () {
+                return info.open(_this.map, _this.markers[i - 1]);
+            });
         }
 
         /**
@@ -151,7 +176,7 @@ var GMap = function () {
          */
 
     }, {
-        key: "removeMarkers",
+        key: 'removeMarkers',
         value: function removeMarkers() {
             this.markers.forEach(function (elem) {
                 return elem.setMap(null);
@@ -194,12 +219,14 @@ gmap2.changeType('terrain');
 var button0 = document.getElementById('init-button');
 button0.addEventListener('click', function (e) {
     gmap1.init();
+    e.preventDefault();
 });
 
 //Button for change Zoom in the first map
 var button1 = document.getElementById('zoom-button');
 button1.addEventListener('click', function (e) {
     gmap1.changeOptions({ zoom: 15 });
+    e.preventDefault();
 });
 
 /***/ })

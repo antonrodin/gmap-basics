@@ -42,15 +42,29 @@ export default class GMap {
      * Add simple marker into your map
      * @param {*} center { 0.00 , 0.00 } Latitude and Longitude Object
      * @param {*} title Title of the marker
+     * @param {*} draggable true or false...
      */
-    addSimpleMarker(center, title) {
+    addSimpleMarker(center, title, draggable = false) {
         let marker = new google.maps.Marker({
             position: center,
             map: this.map,
+            draggable: draggable,
             title: title
         });
 
-        this.markers.push(marker);
+        return this.markers.push(marker);
+    }
+
+    /**
+     * 
+     * @param {*} center {Lat, Lng} Object 
+     * @param {*} title Title of the Marker
+     * @param {*} html Some html fot Info Window
+     */
+    addHtmlMarker(center, title, html, draggable = false) {
+        let i = this.addSimpleMarker(center, title, draggable);
+        let info = new google.maps.InfoWindow({content: html});;
+        this.markers[i-1].addListener('click', () => info.open(this.map, this.markers[i-1]) );
     }
 
     /**
